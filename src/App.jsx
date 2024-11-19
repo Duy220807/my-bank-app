@@ -15,6 +15,7 @@ import RegisterPage from './pages/Register/RegisterPage';
 import TransferPage from './pages/Transfer/TransferPage';
 import BillPaymentPage from './pages/BillPayment/BillPaymentPage';
 import LoanPage from './pages/Loan/LoanPage';
+import CreateCardPage from './pages/Card/CreateCardPage';
 
 const ScrollToTop = () => {
   const location = useLocation();
@@ -70,6 +71,14 @@ const App = () => {
             element={
               <Layout>
                 <LoanPage />
+              </Layout>
+            }
+          />
+          <Route
+            path="/card"
+            element={
+              <Layout>
+                <CreateCardPage />
               </Layout>
             }
           />
