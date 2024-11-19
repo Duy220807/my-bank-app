@@ -1,0 +1,37 @@
+.transaction-status {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 12px;
+    transform: rotate(-20deg);
+    transform-origin: right bottom;
+    z-index: 1;
+    border-radius: 5px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    /* Thêm bóng đổ */
+}
+
+.success {
+    background-color: #52c41a;
+    /* Xanh lá */
+}
+
+.failed {
+    background-color: #f5222d;
+    /* Đỏ */
+}
+
+.pending {
+    background-color: #faad14;
+    /* Vàng */
+}
+
+.card-container {
+    position: relative;
+    /* overflow: hidden;  */
+    /* Đảm bảo phần trạng thái không tràn ra ngoài card */
+}
