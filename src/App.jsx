@@ -3,15 +3,16 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import LoginPage from './pages/LoginPage';
-import DashboardPage from './pages/home/DashboardPage';
+import DashboardPage from './pages/Home/DashboardPage';
 // import RegisterPage from './pages/RegisterPage';
 // import TransferPage from './pages/TransferPage';
 import Layout from './components/Layout'; // Import Layout
 // import PaymentPage from './pages/PaymentPage';
 // import LoanPage from './pages/LoanPage';
-import TransferPage from './pages/Transfer';
+// import TransferPage from './pages/Transfer';
 import LoginPage from './pages/Login/LoginPage';
 import RegisterPage from './pages/Register/RegisterPage';
+import TransferPage from './pages/Transfer/TransferPage';
 
 const App = () => {
   return (
