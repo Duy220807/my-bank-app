@@ -1,7 +1,7 @@
-// src/App.jsx
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 // import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/Home/DashboardPage';
 // import RegisterPage from './pages/RegisterPage';
@@ -14,11 +14,24 @@ import LoginPage from './pages/Login/LoginPage';
 import RegisterPage from './pages/Register/RegisterPage';
 import TransferPage from './pages/Transfer/TransferPage';
 import BillPaymentPage from './pages/BillPayment/BillPaymentPage';
+import LoanPage from './pages/Loan/LoanPage';
+
+const ScrollToTop = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Cuộn lên đầu trang mỗi khi đường dẫn thay đổi
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  return null;
+};
 
 const App = () => {
   return (
     <Provider store={store}>
       <Router>
+        <ScrollToTop /> {/* Đảm bảo ScrollToTop luôn được sử dụng */}
         <Routes>
           {/* Các trang auth */}
           <Route path="/login" element={<LoginPage />} />
@@ -34,9 +47,7 @@ const App = () => {
           />
           <Route
             path="/register"
-            element={
-              <RegisterPage />
-            }
+            element={<RegisterPage />}
           />
           <Route
             path="/transfer"
@@ -51,6 +62,14 @@ const App = () => {
             element={
               <Layout>
                 <BillPaymentPage />
+              </Layout>
+            }
+          />
+          <Route
+            path="/loan"
+            element={
+              <Layout>
+                <LoanPage />
               </Layout>
             }
           />

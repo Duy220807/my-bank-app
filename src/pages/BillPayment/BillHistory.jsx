@@ -9,8 +9,8 @@ const BillHistory = ({ transactions, filterAmount, filterDate, handleAmountFilte
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1000);
-    return () => clearTimeout(timer);
+    const timer = setTimeout(() => setLoading(false), 1000); // Simulate data loading
+    return () => clearTimeout(timer); // Cleanup the timer when component unmounts
   }, []);
 
   const filteredTransactionsList = transactions.filter((transaction) => {
@@ -72,11 +72,14 @@ const BillHistory = ({ transactions, filterAmount, filterDate, handleAmountFilte
         </Row>
       )}
 
-      <Pagination
-        total={filteredTransactionsList.length}
-        pageSize={2}
-        className="mt-4 flex justify-center"
-      />
+      {/* Hide pagination while loading */}
+      {!loading && (
+        <Pagination
+          total={filteredTransactionsList.length}
+          pageSize={2}
+          className="mt-4 flex justify-center"
+        />
+      )}
     </Card>
   );
 };

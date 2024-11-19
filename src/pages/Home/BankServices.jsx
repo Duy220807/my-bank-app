@@ -18,7 +18,7 @@ const BankServices = () => {
         { title: "Chuyển tiền", icon: <WalletOutlined />, description: "Chuyển tiền đến tài khoản khác", imgSrc: transferImg, action: () => navigate('/transfer') },
         { title: "Thanh toán hóa đơn", icon: <TransactionOutlined />, description: "Thanh toán hóa đơn điện, nước, internet", imgSrc: billImg, action: () => navigate('/payment') },
         { title: "Mở thẻ", icon: <WalletOutlined />, description: "Mở thẻ tín dụng với hạn mức linh hoạt", imgSrc: cardImg },
-        { title: "Đăng ký vay tín chấp", icon: <TransactionOutlined />, description: "Đăng ký gửi vay tín chấp với lãi suất hấp dẫn", imgSrc: loanImg },
+        { title: "Đăng ký vay tín chấp", icon: <TransactionOutlined />, description: "Đăng ký gửi vay tín chấp với lãi suất hấp dẫn", imgSrc: loanImg, action: () => navigate('/loan') },
         { title: "Đăng ký tài khoản tiết kiệm", icon: <TransactionOutlined />, description: "Đăng ký tài khoản tiết kiệm với lãi suất hấp dẫn", imgSrc: saveImg },
         { title: "Chăm sóc khách hàng", icon: <TransactionOutlined />, description: "Chăm sóc khách hàng KLB", imgSrc: chatImg },
     ];

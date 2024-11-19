@@ -1,9 +1,5 @@
 // src/redux/store.js
-import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './userSlice';
+import { createStore } from 'redux';
+import loanReducer from './reducers';
 
-export const store = configureStore({
-  reducer: {
-    user: userReducer,
-  },
-});
+export const store = createStore(loanReducer);

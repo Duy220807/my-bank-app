@@ -1,6 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { notification } from "antd"; // Import notification từ Ant Design
 import banner1 from '../../assets/banner/banner1.png';
 import banner2 from '../../assets/banner/banner2.png';
 import banner3 from '../../assets/banner/banner3.png';
@@ -21,6 +22,15 @@ const PromotionsCarousel = () => {
     groupedPromotions.push(promotions.slice(i, i + 2));
   }
 
+  // Hàm để hiển thị thông báo
+  const handlePromoClick = (promo) => {
+    notification.warning({
+      message: promo.title,
+      description: 'Chức năng đang triển khai',
+      placement: "topRight", // Vị trí thông báo
+    });
+  };
+
   return (
     <div className="w-full p-2">
       <Swiper spaceBetween={10} slidesPerView={1} loop={true} autoplay={{ delay: 3000 }}>
@@ -31,7 +41,7 @@ const PromotionsCarousel = () => {
                 <div
                   key={promo.id}
                   className="w-1/2 p-3 transition-transform duration-300 hover:scale-105"
-                  onClick={() => alert(`Clicked on: ${promo.title}`)} // Hành động khi click
+                  onClick={() => handlePromoClick(promo)} // Gọi hàm handlePromoClick khi nhấn
                 >
                   <img
                     src={promo.image}

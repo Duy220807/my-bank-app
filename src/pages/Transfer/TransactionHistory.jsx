@@ -9,13 +9,13 @@ const { Paragraph } = Typography;
 const TransactionHistory = ({ transactions, filterAmount, filterDate, handleAmountFilterChange, handleDateFilterChange }) => {
   const [loading, setLoading] = useState(true);
 
-  // Giả lập thời gian tải dữ liệu (1 giây)
+  // Simulate data loading (1 second)
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoading(false); // Sau 1 giây, dữ liệu được tải xong
+      setLoading(false); // Data is loaded after 1 second
     }, 1000);
 
-    return () => clearTimeout(timer); // Dọn dẹp timer khi component unmount
+    return () => clearTimeout(timer); // Clean up the timer when the component unmounts
   }, []);
 
   const filteredTransactionsList = transactions.filter((transaction) => {
@@ -46,7 +46,7 @@ const TransactionHistory = ({ transactions, filterAmount, filterDate, handleAmou
         </Col>
       </Row>
 
-      {/* Hiển thị Skeleton nếu đang tải */}
+      {/* Show Skeleton while loading */}
       {loading ? (
         <Row gutter={[8, 8]}>
           {[...Array(4)].map((_, index) => (
@@ -78,11 +78,14 @@ const TransactionHistory = ({ transactions, filterAmount, filterDate, handleAmou
         </Row>
       )}
 
-      <Pagination
-        total={filteredTransactionsList.length}
-        pageSize={2}
-        className="mt-4 flex justify-center"
-      />
+      {/* Conditionally render pagination based on loading state */}
+      {!loading && (
+        <Pagination
+          total={filteredTransactionsList.length}
+          pageSize={2}
+          className="mt-4 flex justify-center"
+        />
+      )}
     </Card>
   );
 };
