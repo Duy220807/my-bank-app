@@ -8,9 +8,9 @@ const TransferPage = () => {
   const [transferType, setTransferType] = useState("internal");
   const [transactions] = useState([
     { id: 1, description: "Chuyển tiền cho bạn A", amount: 500000, date: "2024-11-10", status: "success" },
-    { id: 2, description: "Thanh toán hóa đơn điện", amount: 200000, date: "2024-11-05", status: "failed" },
+    { id: 2, description: "Chuyển tiền cho bạn C", amount: 200000, date: "2024-11-05", status: "failed" },
     { id: 3, description: "Chuyển tiền cho bạn B", amount: 300000, date: "2024-11-08", status: "pending" },
-    { id: 4, description: "Thanh toán tiền nước", amount: 150000, date: "2024-11-12", status: "success" },
+    { id: 4, description: "Chuyển tiền cho bạn D", amount: 150000, date: "2024-11-12", status: "success" },
   ]);
   const [filterAmount, setFilterAmount] = useState(null);
   const [filterDate, setFilterDate] = useState(null);

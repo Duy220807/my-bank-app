@@ -1,51 +1,79 @@
-// src/components/BankServices.js
-import React from "react";
-import { Button, Row, Col, Image } from "antd";
+import React, { useState, useEffect } from "react";
+import { Row, Col, Image, Skeleton } from "antd";
 import { WalletOutlined, TransactionOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
+// Import ảnh từ thư mục local
+import transferImg from './../../assets/transfer.png';
+import saveImg from './../../assets/save.png';
+import loanImg from './../../assets/loan.png';
+import billImg from './../../assets/bill.png';
+import cardImg from './../../assets/card.png';
+import chatImg from './../../assets/chat.png';
+
 const BankServices = () => {
     const navigate = useNavigate();
-
+    const [loading, setLoading] = useState(true); // Trạng thái loading
     const services = [
-        { title: "Chuyển tiền", icon: <WalletOutlined />, description: "Chuyển tiền đến tài khoản khác", imgSrc: "https://picsum.photos/800/800?random=1", action: () => navigate('/transfer') },
-        { title: "Thanh toán hóa đơn", icon: <TransactionOutlined />, description: "Thanh toán hóa đơn điện, nước, internet", imgSrc: "https://picsum.photos/800/800?random=2", action: () => navigate('/payment') },
-        { title: "Cập nhật thông tin", icon: <SettingOutlined />, description: "Cập nhật thông tin cá nhân", imgSrc: "https://picsum.photos/800/800?random=3" },
-        { title: "Vay tín chấp", icon: <UserOutlined />, description: "Đăng ký vay tín chấp nhanh chóng", imgSrc: "https://picsum.photos/800/800?random=4", action: () => navigate('/loan') },
-        { title: "Mở thẻ tín dụng", icon: <WalletOutlined />, description: "Mở thẻ tín dụng với hạn mức linh hoạt", imgSrc: "https://picsum.photos/800/800?random=5" },
-        { title: "Xem báo cáo tài chính", icon: <TransactionOutlined />, description: "Xem báo cáo tài chính và thống kê", imgSrc: "https://picsum.photos/800/800?random=6" },
-        { title: "Đăng ký tiết kiệm", icon: <TransactionOutlined />, description: "Đăng ký gửi tiết kiệm với lãi suất hấp dẫn", imgSrc: "https://picsum.photos/800/800?random=7" },
-        { title: "Nạp tiền điện thoại", icon: <WalletOutlined />, description: "Nạp tiền cho điện thoại di động của bạn", imgSrc: "https://picsum.photos/800/800?random=8" },
-        { title: "Quản lý chi tiêu", icon: <SettingOutlined />, description: "Quản lý và phân tích chi tiêu của bạn", imgSrc: "https://picsum.photos/800/800?random=9" },
-        { title: "Đổi mật khẩu", icon: <SettingOutlined />, description: "Đổi mật khẩu tài khoản của bạn", imgSrc: "https://picsum.photos/800/800?random=10" },
+        { title: "Chuyển tiền", icon: <WalletOutlined />, description: "Chuyển tiền đến tài khoản khác", imgSrc: transferImg, action: () => navigate('/transfer') },
+        { title: "Thanh toán hóa đơn", icon: <TransactionOutlined />, description: "Thanh toán hóa đơn điện, nước, internet", imgSrc: billImg, action: () => navigate('/payment') },
+        { title: "Mở thẻ", icon: <WalletOutlined />, description: "Mở thẻ tín dụng với hạn mức linh hoạt", imgSrc: cardImg },
+        { title: "Đăng ký vay tín chấp", icon: <TransactionOutlined />, description: "Đăng ký gửi vay tín chấp với lãi suất hấp dẫn", imgSrc: loanImg },
+        { title: "Đăng ký tài khoản tiết kiệm", icon: <TransactionOutlined />, description: "Đăng ký tài khoản tiết kiệm với lãi suất hấp dẫn", imgSrc: saveImg },
+        { title: "Chăm sóc khách hàng", icon: <TransactionOutlined />, description: "Chăm sóc khách hàng KLB", imgSrc: chatImg },
     ];
 
+    // Simulate loading with a 1-second delay
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false); // Set loading to false after 1 second
+        }, 1000);
+
+        return () => clearTimeout(timer); // Clean up timer on component unmount
+    }, []);
+
     return (
-        <Row gutter={[16, 16]} className="mt-4">
-            {services.map((service, index) => (
-                <Col xs={24} sm={12} md={8} lg={6} key={index}>
-                    {/* Sử dụng Tailwind CSS thay cho Ant Design Card */}
-                    <div className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                        <Image alt={service.title} src={service.imgSrc} className="w-full h-48 object-cover" />
-                        <div className="p-4">
-                            <div className="flex justify-between items-center">
-                                <h3 className="text-lg font-semibold">{service.title}</h3>
-                                <div className="text-xl">{service.icon}</div>
+        <div className="mt-4">
+            {/* Hiển thị skeleton khi loading */}
+            {loading ? (
+                <Row gutter={[16, 16]}>
+                    {Array(6).fill(0).map((_, index) => (
+                        <Col xs={24} sm={12} md={8} lg={6} key={index}>
+                            <div className="bg-white shadow-lg rounded-2xl overflow-hidden m-4">
+                                <Skeleton.Image active className="w-full h-80" />
+                                <Skeleton active paragraph={false} />
                             </div>
-                            <p className="text-sm text-gray-600 mt-2 truncate">{service.description}</p>
-                            <Button
-                                type="primary"
-                                block
-                                className="mt-4"
+                        </Col>
+                    ))}
+                </Row>
+            ) : (
+                <Row gutter={[16, 16]}>
+                    {services.map((service, index) => (
+                        <Col xs={24} sm={12} md={8} lg={6} key={index}>
+                            {/* Gói toàn bộ nội dung dịch vụ vào một div và sử dụng sự kiện onClick */}
+                            <div
+                                className="bg-white shadow-lg rounded-2xl overflow-hidden hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer m-4"
                                 onClick={service.action || (() => console.log(service.title))}
                             >
-                                Khám phá
-                            </Button>
-                        </div>
-                    </div>
-                </Col>
-            ))}
-        </Row>
+                                {/* Tên dịch vụ sẽ được ẩn khi không hover */}
+                                <div className="relative group">
+                                    <Image
+                                        alt={service.title}
+                                        src={service.imgSrc}
+                                        className="w-full object-cover"
+                                        preview={false}
+                                    />
+                                    {/* Tên dịch vụ hiển thị khi hover */}
+                                    <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 text-white flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <h3 className="text-xl font-semibold">{service.title}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </Col>
+                    ))}
+                </Row>
+            )}
+        </div>
     );
 };
 

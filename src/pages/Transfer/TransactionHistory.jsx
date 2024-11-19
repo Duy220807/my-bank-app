@@ -1,5 +1,5 @@
-import React from 'react';
-import { Card, Row, Col, Select, Pagination, Typography } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Card, Row, Col, Select, Pagination, Typography, Skeleton } from 'antd';
 import { TransactionOutlined } from '@ant-design/icons';
 import './TransactionHistory.css';
 
@@ -7,6 +7,17 @@ const { Option } = Select;
 const { Paragraph } = Typography;
 
 const TransactionHistory = ({ transactions, filterAmount, filterDate, handleAmountFilterChange, handleDateFilterChange }) => {
+  const [loading, setLoading] = useState(true);
+
+  // Giả lập thời gian tải dữ liệu (1 giây)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false); // Sau 1 giây, dữ liệu được tải xong
+    }, 1000);
+
+    return () => clearTimeout(timer); // Dọn dẹp timer khi component unmount
+  }, []);
+
   const filteredTransactionsList = transactions.filter((transaction) => {
     let isValid = true;
     if (filterAmount && transaction.amount !== filterAmount) {
@@ -35,26 +46,37 @@ const TransactionHistory = ({ transactions, filterAmount, filterDate, handleAmou
         </Col>
       </Row>
 
-      <Row gutter={[8, 8]}>
-        {filteredTransactionsList.map((transaction) => (
-          <Col span={24} key={transaction.id}>
-            <div className="card-container">
-              <span className={`transaction-status ${transaction.status}`}>
-                {transaction.status === "success"
-                  ? "Thành công"
-                  : transaction.status === "failed"
-                    ? "Thất bại"
-                    : "Đang xử lý"}
-              </span>
-              <Card className="shadow-lg p-2 rounded-lg">
-                <Paragraph><strong>{transaction.description}</strong></Paragraph>
-                <Paragraph><strong>Số tiền:</strong> {transaction.amount} VNĐ</Paragraph>
-                <Paragraph><strong>Ngày:</strong> {transaction.date}</Paragraph>
-              </Card>
-            </div>
-          </Col>
-        ))}
-      </Row>
+      {/* Hiển thị Skeleton nếu đang tải */}
+      {loading ? (
+        <Row gutter={[8, 8]}>
+          {[...Array(4)].map((_, index) => (
+            <Col span={24} key={index}>
+              <Skeleton active paragraph={{ rows: 3 }} />
+            </Col>
+          ))}
+        </Row>
+      ) : (
+        <Row gutter={[8, 8]}>
+          {filteredTransactionsList.map((transaction) => (
+            <Col span={24} key={transaction.id}>
+              <div className="card-container">
+                <span className={`transaction-status ${transaction.status}`}>
+                  {transaction.status === "success"
+                    ? "Thành công"
+                    : transaction.status === "failed"
+                      ? "Thất bại"
+                      : "Đang xử lý"}
+                </span>
+                <Card className="shadow-lg p-2 rounded-lg">
+                  <Paragraph><strong>{transaction.description}</strong></Paragraph>
+                  <Paragraph><strong>Số tiền:</strong> {transaction.amount} VNĐ</Paragraph>
+                  <Paragraph><strong>Ngày:</strong> {transaction.date}</Paragraph>
+                </Card>
+              </div>
+            </Col>
+          ))}
+        </Row>
+      )}
 
       <Pagination
         total={filteredTransactionsList.length}

@@ -6,7 +6,7 @@ import BankServices from "./BankServices"; // Import BankServices
 const DashboardPage = () => {
   // Mock data for account info
   const accountInfo = {
-    name: "Test User",
+    name: "NGUYEN VAN AN",
     accountNumber: "123-456-789",
     balance: 5000, // Số dư
   };
