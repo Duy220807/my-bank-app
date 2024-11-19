@@ -1,7 +1,9 @@
 // src/pages/DashboardPage.js
 import React from "react";
-import AccountDashboard from "./AccountDashboard"; // Import AccountDashboard
-import BankServices from "./BankServices"; // Import BankServices
+import AccountDashboard from "./AccountDashboard";
+import BankServices from "./BankServices";
+import PromotionsCarousel from "./PromotionsCarousel";
+// import PromotionsCarousel from "../components/PromotionsCarousel";
 
 const DashboardPage = () => {
   // Mock data for account info
@@ -13,11 +15,17 @@ const DashboardPage = () => {
 
   return (
     <div className="w-full p-4">
+
+      {/* Gọi component PromotionsCarousel */}
+      <PromotionsCarousel />
+
       {/* Gọi component AccountDashboard và truyền dữ liệu tài khoản */}
       <AccountDashboard accountInfo={accountInfo} />
 
       {/* Gọi component BankServices để hiển thị các dịch vụ */}
       <BankServices />
+
+
     </div>
   );
 };

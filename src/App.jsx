@@ -13,6 +13,7 @@ import Layout from './components/Layout'; // Import Layout
 import LoginPage from './pages/Login/LoginPage';
 import RegisterPage from './pages/Register/RegisterPage';
 import TransferPage from './pages/Transfer/TransferPage';
+import BillPaymentPage from './pages/BillPayment/BillPaymentPage';
 
 const App = () => {
   return (
@@ -45,7 +46,14 @@ const App = () => {
               </Layout>
             }
           />
-
+          <Route
+            path="/payment"
+            element={
+              <Layout>
+                <BillPaymentPage />
+              </Layout>
+            }
+          />
         </Routes>
       </Router>
     </Provider>

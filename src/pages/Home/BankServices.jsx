@@ -4,12 +4,12 @@ import { WalletOutlined, TransactionOutlined, SettingOutlined, UserOutlined } fr
 import { useNavigate } from 'react-router-dom';
 
 // Import ảnh từ thư mục local
-import transferImg from './../../assets/transfer.png';
-import saveImg from './../../assets/save.png';
-import loanImg from './../../assets/loan.png';
-import billImg from './../../assets/bill.png';
-import cardImg from './../../assets/card.png';
-import chatImg from './../../assets/chat.png';
+import transferImg from './../../assets/menus/transfer.png';
+import saveImg from './../../assets/menus/save.png';
+import loanImg from './../../assets/menus/loan.png';
+import billImg from './../../assets/menus/bill.png';
+import cardImg from './../../assets/menus/card.png';
+import chatImg from './../../assets/menus/chat.png';
 
 const BankServices = () => {
     const navigate = useNavigate();
