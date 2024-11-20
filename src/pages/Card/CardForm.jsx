@@ -39,7 +39,7 @@ const CardForm = () => {
                         ) : (
                             <div
                                 style={{ position: 'relative' }}
-                                className={`p-4 mb-4 cursor-pointer transition-transform duration-300 hover:scale-105 rounded-lg shadow-none ${selectedCard?.id === card.id ? 'shadow-lg border-2 border-blue-500' : ''} ${card.status === 'active' ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                className={`p-4 mb-4 cursor-pointer transition-transform duration-300 hover:scale-105 rounded-lg shadow-lg ${selectedCard?.id === card.id ? 'border-2 border-blue-500' : ''} ${card.status === 'active' ? 'opacity-50 cursor-not-allowed' : ''}`}
                                 onClick={() => card.status !== 'active' && handleCardSelect(card)} // Prevent selection for active cards
                             >
                                 <img
@@ -69,65 +69,38 @@ const CardForm = () => {
                                 {card.status === 'active' && (
                                     <div className="absolute top-2 left-2 bg-red-500 text-white p-2 rounded-full text-sm">Active</div>
                                 )}
+
+                                {/* Display card details when selected */}
+                                {selectedCard?.id === card.id && (
+                                    <div className="absolute top-0 bottom-0 left-0 right-0 bg-white p-6 rounded-lg shadow-lg">
+                                        <Title level={5}>Chi tiết thẻ</Title>
+                                        <Paragraph>
+                                            <strong>Loại thẻ:</strong> {card.cardType}
+                                        </Paragraph>
+                                        <Paragraph>
+                                            <strong>Ngân hàng:</strong> {card.bank}
+                                        </Paragraph>
+                                        <Paragraph>
+                                            <strong>Số tài khoản:</strong> {card.accountNumber}
+                                        </Paragraph>
+                                        <Paragraph>
+                                            <strong>Tên chủ thẻ:</strong> {card.cardholder}
+                                        </Paragraph>
+                                        <Button
+                                            type="primary"
+                                            block
+                                            icon={<CreditCardOutlined />}
+                                            className="rounded-md py-3"
+                                        >
+                                            Mở thẻ mới
+                                        </Button>
+                                    </div>
+                                )}
                             </div>
                         )}
                     </Col>
                 ))}
             </Row>
-
-            {/* Show details of the selected card */}
-            {selectedCard && loading ? (
-                <Skeleton.Image active className="w-full h-80 mb-4" />
-            ) : (
-                selectedCard && (
-                    <div className="mt-6">
-                        <Title level={4}>Chi tiết thẻ đã chọn</Title>
-                        <Card className="shadow-lg p-4 rounded-lg">
-                            <Row align="middle" gutter={16}>
-                                <Col span={8}>
-                                    {loading ? (
-                                        <Skeleton.Image active width={300} height={200} />  // Skeleton cho ảnh chi tiết thẻ
-                                    ) : (
-                                        <img
-                                            width={300} // Kích thước ảnh
-                                            alt={selectedCard.bank}
-                                            src={selectedCard.image}
-                                            className="rounded-lg"
-                                        />
-                                    )}
-                                </Col>
-
-                                <Col span={16}>
-                                    <Paragraph>
-                                        <strong>Loại thẻ:</strong> {selectedCard.cardType}
-                                    </Paragraph>
-                                    <Paragraph>
-                                        <strong>Ngân hàng:</strong> {selectedCard.bank}
-                                    </Paragraph>
-                                    <Paragraph>
-                                        <strong>Số tài khoản:</strong> {selectedCard.accountNumber}
-                                    </Paragraph>
-                                    <Paragraph>
-                                        <strong>Tên chủ thẻ:</strong> {selectedCard.cardholder}
-                                    </Paragraph>
-                                </Col>
-                            </Row>
-                        </Card>
-                    </div>
-                )
-            )}
-
-            {/* Button to create a new card */}
-            <Button
-                type="primary"
-                block
-                icon={<CreditCardOutlined />}
-                className="mt-6 rounded-md py-3"
-                onClick={() => setSelectedCard(null)} // Reset the selected card
-                disabled={loading} // Disable button while loading
-            >
-                {loading ? <Skeleton.Input active size="small" /> : 'Mở thẻ mới'}
-            </Button>
         </div>
     );
 };
