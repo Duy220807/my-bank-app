@@ -38,8 +38,8 @@ const CardForm = () => {
                             <Skeleton.Image active className="w-full mb-4" />  // Skeleton dạng ảnh
                         ) : (
                             <div
-                                style={{ position: 'relative' }}
-                                className={`p-4 mb-4 cursor-pointer transition-transform duration-300 hover:scale-105 rounded-lg shadow-lg ${selectedCard?.id === card.id ? 'border-2 border-blue-500' : ''} ${card.status === 'active' ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                style={{ position: 'relative', border: 'none', shadow: 'none' }}
+                                className={`p-4 mb-4 cursor-pointer transition-transform duration-300 hover:scale-105 rounded-lg ${selectedCard?.id === card.id ? 'border-2 border-blue-500' : ''} ${card.status === 'active' ? 'opacity-50 cursor-not-allowed' : ''}`}
                                 onClick={() => card.status !== 'active' && handleCardSelect(card)} // Prevent selection for active cards
                             >
                                 <img
