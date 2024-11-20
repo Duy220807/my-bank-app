@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, Col, Row, Typography, Skeleton } from 'antd';
+import { Button, Card, Col, Row, Typography, Skeleton, Modal } from 'antd';
 import { CreditCardOutlined } from '@ant-design/icons';
 import './CardForm.css';
 
@@ -16,29 +16,42 @@ const fakeCards = [
 const CardForm = () => {
     const [selectedCard, setSelectedCard] = useState(null);  // Store the selected card
     const [loading, setLoading] = useState(true);  // Trạng thái loading
+    const [isMobile, setIsMobile] = useState(false); // To check if it's a mobile screen
 
     useEffect(() => {
         // Giả lập tải dữ liệu sau 2 giây
         setTimeout(() => {
             setLoading(false);
         }, 1000);  // Sau 2 giây, dữ liệu sẽ được tải xong
+
+        // Check if screen size is mobile
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768); // 768px is considered mobile size
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     const handleCardSelect = (card) => {
         setSelectedCard(card);  // Update selected card
     };
 
+    const handleModalClose = () => {
+        setSelectedCard(null); // Close modal by clearing selected card
+    };
+
     return (
         <div className="w-full mx-auto p-6">
             <Title level={3}>Danh sách thẻ</Title>
-            <Row gutter={16}>
+            <Row gutter={[16, 16]} justify="start">
                 {fakeCards.map((card) => (
-                    <Col span={8} key={card.id}>
+                    <Col xs={24} sm={8} key={card.id}>
                         {loading ? (
                             <Skeleton.Image active className="w-full mb-4" />  // Skeleton dạng ảnh
                         ) : (
                             <div
-                                style={{ position: 'relative', border: 'none', shadow: 'none' }}
+                                style={{ position: 'relative', border: 'none', boxShadow: 'none' }}
                                 className={`p-4 mb-4 cursor-pointer transition-transform duration-300 hover:scale-105 rounded-lg ${selectedCard?.id === card.id ? 'border-2 border-blue-500' : ''} ${card.status === 'active' ? 'opacity-50 cursor-not-allowed' : ''}`}
                                 onClick={() => card.status !== 'active' && handleCardSelect(card)} // Prevent selection for active cards
                             >
@@ -70,8 +83,8 @@ const CardForm = () => {
                                     <div className="absolute top-2 left-2 bg-red-500 text-white p-2 rounded-full text-sm">Active</div>
                                 )}
 
-                                {/* Display card details when selected */}
-                                {selectedCard?.id === card.id && (
+                                {/* Display card details when selected (for non-mobile view) */}
+                                {!isMobile && selectedCard?.id === card.id && (
                                     <div className="absolute top-0 bottom-0 left-0 right-0 bg-white p-6 rounded-lg shadow-lg">
                                         <Title level={5}>Chi tiết thẻ</Title>
                                         <Paragraph>
@@ -101,6 +114,40 @@ const CardForm = () => {
                     </Col>
                 ))}
             </Row>
+
+            {/* Display card details in modal for mobile */}
+            {isMobile && selectedCard && (
+                <Modal
+                    visible={!!selectedCard}
+                    onCancel={handleModalClose}
+                    footer={null}
+                    width={300}
+                    bodyStyle={{ padding: '20px' }}
+                    destroyOnClose
+                >
+                    <Title level={5}>Chi tiết thẻ</Title>
+                    <Paragraph>
+                        <strong>Loại thẻ:</strong> {selectedCard.cardType}
+                    </Paragraph>
+                    <Paragraph>
+                        <strong>Ngân hàng:</strong> {selectedCard.bank}
+                    </Paragraph>
+                    <Paragraph>
+                        <strong>Số tài khoản:</strong> {selectedCard.accountNumber}
+                    </Paragraph>
+                    <Paragraph>
+                        <strong>Tên chủ thẻ:</strong> {selectedCard.cardholder}
+                    </Paragraph>
+                    <Button
+                        type="primary"
+                        block
+                        icon={<CreditCardOutlined />}
+                        className="rounded-md py-3"
+                    >
+                        Mở thẻ mới
+                    </Button>
+                </Modal>
+            )}
         </div>
     );
 };

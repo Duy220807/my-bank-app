@@ -1,10 +1,8 @@
-// Headers.js
 import { Header } from "antd/es/layout/layout";
 import { Dropdown, Menu } from "antd";
 import avatar from '../assets/images/avatar.png';
 import logo from '../assets/logo/logo.png'; // Đường dẫn đến ảnh logo
 import NotificationPopover from "./NotificationPopover";
-// import NotificationPopover from './NotificationPopover'; // Import component NotificationPopover
 
 const Headers = () => {
     const userMenu = (
@@ -42,17 +40,32 @@ const Headers = () => {
         }
     ];
 
-
     return (
-        <Header style={{ position: 'sticky', top: 0, zIndex: 1000, background: '#001529', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Header
+            style={{
+                position: 'sticky',
+                top: 0,
+                zIndex: 1000,
+                background: '#001529',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '0 20px', // Thêm padding để tránh các phần tử bị cắt
+            }}
+        >
             {/* Logo */}
-            <div>
+            <div style={{ flex: 1 }}>
                 <img
                     src={logo}
                     alt="KienlongBank Logo"
-                    style={{ height: '40px' }} // Điều chỉnh chiều cao của logo
+                    style={{
+                        height: '30px',  // Giảm chiều cao logo trên màn hình nhỏ
+                        maxWidth: '100%',
+                        objectFit: 'contain',  // Đảm bảo logo không bị méo
+                    }}
                 />
             </div>
+
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 {/* Nút thông báo */}
                 <NotificationPopover notifications={notifications} />
@@ -63,9 +76,14 @@ const Headers = () => {
                         <img
                             src={avatar}
                             alt="Avatar"
-                            style={{ width: '30px', height: '30px', borderRadius: '50%', marginRight: '8px' }}
+                            style={{
+                                width: '25px',  // Giảm kích thước avatar trên mobile
+                                height: '25px',
+                                borderRadius: '50%',
+                                marginRight: '8px',
+                            }}
                         />
-                        <span style={{ color: 'white', fontWeight: 600 }}>
+                        <span style={{ color: 'white', fontWeight: 600, fontSize: '14px' }}>
                             NGUYEN VAN AN
                         </span>
                     </div>

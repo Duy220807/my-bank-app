@@ -1,0 +1,21 @@
+/* Responsive styling for mobile */
+@media (max-width: 768px) {
+    .ant-popover {
+        width: 250px !important;
+        /* Giảm chiều rộng của popover trên màn hình nhỏ */
+    }
+
+    .ant-popover-inner {
+        padding: 8px;
+    }
+
+    .ant-btn-link {
+        font-size: 12px;
+        /* Giảm font-size của nút "Xem tất cả" trên màn hình nhỏ */
+    }
+
+    .ant-badge-dot {
+        font-size: 16px;
+        /* Giảm kích thước icon bell trên màn hình nhỏ */
+    }
+}

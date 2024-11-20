@@ -9,7 +9,7 @@ const DashboardPage = () => {
   // Mock data for account info
   const accountInfo = {
     name: "NGUYEN VAN AN",
-    accountNumber: "123-456-789",
+    accountNumber: "01928299",
     balance: 5000, // Số dư
   };
 

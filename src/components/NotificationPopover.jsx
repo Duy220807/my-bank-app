@@ -4,7 +4,7 @@ import { BellOutlined } from '@ant-design/icons';
 
 const NotificationPopover = ({ notifications }) => {
     const notificationContent = (
-        <div style={{ width: '300px' }}>
+        <div style={{ width: '280px', maxWidth: '100%' }}>
             {notifications.slice(0, 5).map((notification, index) => (
                 <div key={index} style={{ padding: '8px', borderBottom: '1px solid #ddd' }}>
                     <strong>{notification.title}</strong>
@@ -27,6 +27,10 @@ const NotificationPopover = ({ notifications }) => {
             content={notificationContent}
             trigger="hover"
             placement="bottomRight"
+            overlayStyle={{
+                maxWidth: '280px', // Đảm bảo popover không quá rộng
+                minWidth: '250px', // Đảm bảo không quá hẹp
+            }}
         >
             <Badge count={notifications.length} offset={[0, 0]} style={{ backgroundColor: '#ff4d4f', marginRight: '16px' }}>
                 <BellOutlined className="text-white text-2xl cursor-pointer mr-6 hover:scale-110 hover:text-[#ff4d4f] transition-all duration-300" />

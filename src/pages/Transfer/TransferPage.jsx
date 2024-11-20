@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Row, Col, Card, Typography } from "antd";
 import TransferForm from './TransferForm';
 import TransactionHistory from './TransactionHistory';
-// import './TransferPage.css';
 
 const TransferPage = () => {
   const [transferType, setTransferType] = useState("internal");
@@ -21,9 +20,9 @@ const TransferPage = () => {
 
   return (
     <div className="w-full mx-auto p-6">
-      <Row gutter={24}>
+      <Row gutter={[16, 16]}>
         {/* Card Chuyển tiền */}
-        <Col span={18}>
+        <Col xs={24} sm={18}>
           <Card
             cover={<img alt="Chuyển tiền" src="https://www.noblewebstudio.com/blog/wp-content/uploads/2023/01/17-domestic-money-transfer-software-api.jpg" className="rounded-t-lg" />}
             className="shadow-md p-4 rounded-lg"
@@ -33,7 +32,7 @@ const TransferPage = () => {
         </Col>
 
         {/* Card Lịch sử giao dịch */}
-        <Col span={6}>
+        <Col xs={24} sm={6}>
           <TransactionHistory
             transactions={transactions}
             filterAmount={filterAmount}

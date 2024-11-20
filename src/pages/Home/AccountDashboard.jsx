@@ -6,7 +6,7 @@ const { Title, Paragraph } = Typography;
 
 const AccountDashboard = ({ accountInfo }) => {
   const [loading, setLoading] = useState(true);
-  const [isBalanceVisible, setIsBalanceVisible] = useState(true);
+  const [isBalanceVisible, setIsBalanceVisible] = useState(false);
 
   // Giả lập tải dữ liệu với delay 1 giây
   useEffect(() => {
@@ -23,30 +23,30 @@ const AccountDashboard = ({ accountInfo }) => {
 
   return (
     <div className="w-full bg-gray-100 p-4 flex justify-center">
-      <div className="w-full">
+      <div className="w-full"> {/* Tối đa chiều rộng */}
         {/* Thông tin tài khoản */}
         <Card
-          className="shadow-xl w-full mt-6 rounded-lg bg-white p-6"
+          className="shadow-xl w-full mt-6 rounded-lg bg-white p-2"
           bordered={false}
         >
           {loading ? (
             <Skeleton active paragraph={{ rows: 2 }} />
           ) : (
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row items-center justify-between sm:space-x-6">
               {/* Thông tin bên trái */}
-              <div>
-                <Title level={3} className="text-indigo-600 font-semibold">
+              <div className="sm:w-2/3">
+                <Title level={3} className="text-indigo-600 font-semibold text-center sm:text-left">
                   {accountInfo.name}
                 </Title>
                 <div className="mt-2">
-                  <Paragraph className="text-lg">
+                  <Paragraph className="text-lg text-center sm:text-left">
                     <strong>Số tài khoản:</strong> {accountInfo.accountNumber}
                   </Paragraph>
                 </div>
               </div>
 
               {/* Thông tin bên phải */}
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center justify-center sm:justify-end space-x-3 sm:w-1/3">
                 <span className="text-lg font-semibold">
                   <strong>Số dư:</strong>{" "}
                   {isBalanceVisible ? (

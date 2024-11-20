@@ -17,6 +17,8 @@ import BillPaymentPage from './pages/BillPayment/BillPaymentPage';
 import LoanPage from './pages/Loan/LoanPage';
 import CreateCardPage from './pages/Card/CreateCardPage';
 
+import './App.css'
+
 const ScrollToTop = () => {
   const location = useLocation();
 

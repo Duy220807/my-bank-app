@@ -20,9 +20,9 @@ const LoanPage = () => {
 
   return (
     <div className="w-full mx-auto p-6">
-      <Row gutter={24}>
+      <Row gutter={[16, 16]}>
         {/* Card Form Vay */}
-        <Col span={18}>
+        <Col sm={18} xs={24}>
           <Card
             cover={<img alt="Vay tiền" src="https://www.publicbankgroup.com/media/dikfw4f4/bftp-new-x1000.jpg" className="rounded-t-lg" />}
             className="shadow-md p-4 rounded-lg"
@@ -32,7 +32,7 @@ const LoanPage = () => {
         </Col>
 
         {/* Card Lịch sử khoản vay */}
-        <Col span={6}>
+        <Col sm={6} xs={24}>
           <LoanHistory
             loans={loans}
             filterAmount={filterAmount}

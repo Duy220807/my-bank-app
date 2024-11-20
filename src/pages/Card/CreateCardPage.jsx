@@ -12,9 +12,9 @@ const CreateCardPage = () => {
 
   return (
     <div className="w-full mx-auto p-6">
-      <Row gutter={24}>
+      <Row gutter={[16, 16]}>
         {/* Card Mở thẻ */}
-        <Col span={18}>
+        <Col sm={18} xs={24}>
           <Card
             cover={<img alt="Mở thẻ" src="https://kienlongbank.com/Data/Sites/1/News/20277/kienlongbank-an-sinh-xa-hoi.jpg" className="rounded-t-lg" />}
             className="shadow-md p-4 rounded-lg"
@@ -24,7 +24,7 @@ const CreateCardPage = () => {
         </Col>
 
         {/* Card Lịch sử thẻ */}
-        <Col span={6}>
+        <Col sm={6} xs={24}>
           <CardHistory
             filterAmount={filterAmount}
             filterDate={filterDate}

@@ -131,7 +131,7 @@ const LoanForm = ({ loanType, handleLoanTypeChange }) => {
       {/* Upload CCCD 2 mặt và ảnh chân dung */}
       <Row gutter={16}>
         <Col span={12}>
-          <Form.Item label="CCCD mặt trước" name="cccdFront" rules={[{ required: true, message: "Vui lòng tải lên mặt trước CCCD" }]}>
+          <Form.Item label="Chụp CCCD mặt trước" name="cccdFront" rules={[{ required: true, message: "Vui lòng tải lên mặt trước CCCD" }]}>
             <Upload
               listType="picture-card"
               showUploadList={false}
@@ -143,7 +143,7 @@ const LoanForm = ({ loanType, handleLoanTypeChange }) => {
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label="CCCD mặt sau" name="cccdBack" rules={[{ required: true, message: "Vui lòng tải lên mặt sau CCCD" }]}>
+          <Form.Item label="Chụp CCCD mặt sau" name="cccdBack" rules={[{ required: true, message: "Vui lòng tải lên mặt sau CCCD" }]}>
             <Upload
               listType="picture-card"
               showUploadList={false}

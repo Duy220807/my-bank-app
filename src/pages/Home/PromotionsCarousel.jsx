@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { notification } from "antd"; // Import notification từ Ant Design
@@ -16,11 +16,19 @@ const PromotionsCarousel = () => {
     { id: 4, title: "Ưu đãi 4", description: "Giảm 10% phí thường niên", image: banner4 },
   ];
 
-  // Nhóm các khuyến mãi thành cặp
-  const groupedPromotions = [];
-  for (let i = 0; i < promotions.length; i += 2) {
-    groupedPromotions.push(promotions.slice(i, i + 2));
-  }
+  // State để lưu thông tin về kích thước màn hình
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Kiểm tra kích thước cửa sổ
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 768); // Giả sử màn hình nhỏ hơn hoặc bằng 768px là mobile
+    };
+    checkScreenSize(); // Kiểm tra khi component được mount
+    window.addEventListener('resize', checkScreenSize); // Lắng nghe sự kiện resize
+
+    return () => window.removeEventListener('resize', checkScreenSize); // Dọn dẹp sự kiện khi component unmount
+  }, []);
 
   // Hàm để hiển thị thông báo
   const handlePromoClick = (promo) => {
@@ -33,23 +41,18 @@ const PromotionsCarousel = () => {
 
   return (
     <div className="w-full p-2">
-      <Swiper spaceBetween={10} slidesPerView={1} loop={true} autoplay={{ delay: 3000 }}>
-        {groupedPromotions.map((group, index) => (
-          <SwiperSlide key={index}>
-            <div className="flex">
-              {group.map((promo) => (
-                <div
-                  key={promo.id}
-                  className="w-1/2 p-3 transition-transform duration-300 hover:scale-105"
-                  onClick={() => handlePromoClick(promo)} // Gọi hàm handlePromoClick khi nhấn
-                >
-                  <img
-                    src={promo.image}
-                    alt={promo.title}
-                    className="w-full object-cover rounded-lg cursor-pointer"
-                  />
-                </div>
-              ))}
+      <Swiper spaceBetween={10} slidesPerView={isMobile ? 1 : 2} loop={true} autoplay={{ delay: 3000 }}>
+        {promotions.map((promo) => (
+          <SwiperSlide key={promo.id}>
+            <div
+              className="p-3 transition-transform duration-300 hover:scale-105"
+              onClick={() => handlePromoClick(promo)} // Gọi hàm handlePromoClick khi nhấn
+            >
+              <img
+                src={promo.image}
+                alt={promo.title}
+                className="w-full object-cover rounded-lg cursor-pointer"
+              />
             </div>
           </SwiperSlide>
         ))}

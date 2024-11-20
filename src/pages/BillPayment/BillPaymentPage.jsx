@@ -18,8 +18,8 @@ const BillPaymentPage = () => {
 
   return (
     <div className="w-full mx-auto p-6">
-      <Row gutter={24}>
-        <Col span={18}>
+      <Row gutter={[16, 16]}>
+        <Col sm={18} xs={24}>
           <Card
             cover={
               <img
@@ -33,7 +33,7 @@ const BillPaymentPage = () => {
             <BillPaymentForm />
           </Card>
         </Col>
-        <Col span={6}>
+        <Col sm={6} xs={24}>
           <BillHistory
             transactions={transactions}
             filterAmount={filterAmount}
