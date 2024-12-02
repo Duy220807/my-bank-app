@@ -1,8 +1,8 @@
-// src/redux/reducers.js
-import { TOGGLE_LOAN_HISTORY } from './actions';
+import { TOGGLE_LOAN_HISTORY, SET_USER, CLEAR_USER } from './actions';
 
 const initialState = {
-  isLoanHistoryVisible: false, // Mặc định là hiển thị lịch sử khoản vay
+  isLoanHistoryVisible: false, // Mặc định không hiển thị lịch sử khoản vay
+  user: null, // Trạng thái người dùng mặc định là null
 };
 
 const loanReducer = (state = initialState, action) => {
@@ -10,7 +10,17 @@ const loanReducer = (state = initialState, action) => {
     case TOGGLE_LOAN_HISTORY:
       return {
         ...state,
-        isLoanHistoryVisible: !state.isLoanHistoryVisible, // Đảo ngược trạng thái
+        isLoanHistoryVisible: !state.isLoanHistoryVisible,
+      };
+    case SET_USER:
+      return {
+        ...state,
+        user: action.payload, // Lưu thông tin người dùng
+      };
+    case CLEAR_USER:
+      return {
+        ...state,
+        user: null, // Xóa thông tin người dùng
       };
     default:
       return state;

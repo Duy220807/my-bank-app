@@ -1,21 +1,36 @@
-// src/components/LoginForm.js
 import React, { useState } from "react";
 import { Form, Input, Button, Checkbox, message, Card } from "antd";
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import { useNavigate, Link } from 'react-router-dom'; // Import Link từ react-router-dom
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import { useNavigate, Link } from "react-router-dom";
+import { login } from "../../mockApi";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/actions";
+// import { login } from "../mockApi"; // Import mock API
 
 const LoginForm = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch(); // Khởi tạo dispatch
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     setLoading(true);
-    // Thực hiện logic đăng nhập (API call hoặc xác thực)
-    setTimeout(() => {
+    try {
+      const mockResponse = await login(values.username, values.password);
+      console.log(mockResponse)
+      dispatch(setUser({
+        username: mockResponse.username,
+        role: mockResponse.role,
+        token: mockResponse.token,
+      }));
+      localStorage.setItem("authToken", mockResponse.token); // Lưu token vào localStorage
+      message.success("Đăng nhập thành công");
+      navigate('/')
+      console.log("Thông tin người dùng:", mockResponse);
+    } catch (error) {
+      message.error(error.message);
+    } finally {
       setLoading(false);
-      message.success('Đăng nhập thành công');
-      navigate('/dashboard');  // Chuyển hướng đến trang Dashboard
-    }, 2000);
+    }
   };
 
   return (
@@ -40,9 +55,9 @@ const LoginForm = () => {
             wrapperCol={{ span: 24 }}
             rules={[{ required: true, message: "Vui lòng nhập mật khẩu!" }]}
           >
-            <Input.Password 
+            <Input.Password
               placeholder="Nhập mật khẩu"
-              iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+              iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
             />
           </Form.Item>
 
@@ -54,10 +69,10 @@ const LoginForm = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button 
-              type="primary" 
-              htmlType="submit" 
-              block 
+            <Button
+              type="primary"
+              htmlType="submit"
+              block
               loading={loading}
               className="bg-blue-600 hover:bg-blue-700 focus:outline-none"
             >
@@ -67,7 +82,6 @@ const LoginForm = () => {
 
           <div className="text-center mt-4">
             <span>Bạn chưa có tài khoản? </span>
-            {/* Thêm liên kết tới trang đăng ký */}
             <Link to="/register" className="text-blue-600 hover:text-blue-800">Đăng ký ngay</Link>
           </div>
         </Form>

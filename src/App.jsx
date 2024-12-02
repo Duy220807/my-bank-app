@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 // import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/Home/DashboardPage';
@@ -36,6 +36,9 @@ const App = () => {
       <Router>
         <ScrollToTop /> {/* Đảm bảo ScrollToTop luôn được sử dụng */}
         <Routes>
+          {/* Chuyển hướng từ / sang /dashboard */}
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
           {/* Các trang auth */}
           <Route path="/login" element={<LoginPage />} />
 
