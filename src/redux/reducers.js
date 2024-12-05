@@ -2,10 +2,10 @@ import { TOGGLE_LOAN_HISTORY, SET_USER, CLEAR_USER } from './actions';
 
 const initialState = {
   isLoanHistoryVisible: false, // Mặc định không hiển thị lịch sử khoản vay
-  user: null, // Trạng thái người dùng mặc định là null
+  user: JSON.parse(localStorage.getItem("user")) || null, // Trạng thái người dùng mặc định là null
 };
 
-const loanReducer = (state = initialState, action) => {
+const reducers = (state = initialState, action) => {
   switch (action.type) {
     case TOGGLE_LOAN_HISTORY:
       return {
@@ -27,4 +27,4 @@ const loanReducer = (state = initialState, action) => {
   }
 };
 
-export default loanReducer;
+export default reducers;

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Form, Input, Button, Checkbox, message, Card } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { useNavigate, Link } from "react-router-dom";
-import { login } from "../../mockApi";
+// import { login } from "../../mockApi";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/actions";
+import { login } from "../../services/api";
 // import { login } from "../mockApi"; // Import mock API
 
 const LoginForm = () => {
@@ -16,16 +17,11 @@ const LoginForm = () => {
     setLoading(true);
     try {
       const mockResponse = await login(values.username, values.password);
-      console.log(mockResponse)
-      dispatch(setUser({
-        username: mockResponse.username,
-        role: mockResponse.role,
-        token: mockResponse.token,
-      }));
+      // console.log(mockResponse)
       localStorage.setItem("authToken", mockResponse.token); // Lưu token vào localStorage
       message.success("Đăng nhập thành công");
       navigate('/')
-      console.log("Thông tin người dùng:", mockResponse);
+      // console.log("Thông tin người dùng:", mockResponse);
     } catch (error) {
       message.error(error.message);
     } finally {
