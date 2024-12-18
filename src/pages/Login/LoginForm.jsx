@@ -5,7 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 // import { login } from "../../mockApi";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/actions";
-import { login } from "../../services/api";
+import { getUserInfo, login } from "../../services/api";
 // import { login } from "../mockApi"; // Import mock API
 
 const LoginForm = () => {
@@ -19,6 +19,14 @@ const LoginForm = () => {
       const mockResponse = await login(values.username, values.password);
       // console.log(mockResponse)
       localStorage.setItem("authToken", mockResponse.token); // Lưu token vào localStorage
+
+      const userInfo = await getUserInfo(mockResponse.token); // Gọi API để lấy thông tin người dùng
+      console.log(userInfo);
+      dispatch(setUser({
+        username: `${userInfo.lastname} ${userInfo.firstname}`,
+        role: 'admin',
+      }));
+
       message.success("Đăng nhập thành công");
       navigate('/')
       // console.log("Thông tin người dùng:", mockResponse);

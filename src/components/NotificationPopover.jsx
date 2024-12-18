@@ -45,7 +45,7 @@ const NotificationPopover = ({ notifications }) => {
         <Popover
             content={notificationContent}
             trigger="hover"
-            placement="bottomRight"
+            placement="bottom"
             overlayStyle={{
                 maxWidth: '300px',
                 minWidth: '280px',
