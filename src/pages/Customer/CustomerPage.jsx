@@ -46,7 +46,7 @@ const CustomerInfo = () => {
                         }}
                     />
                     <h2 className="text-xl font-bold text-gray-800">
-                        {customer.firstname} {customer.lastname}
+                        {customer.lastname} {customer.firstname}
                     </h2>
                     <p className="text-gray-500">{customer.gender}</p>
                 </div>
