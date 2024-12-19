@@ -16,6 +16,7 @@ import './App.css';
 import { getUserInfo } from './services/api';
 import { setUser } from './redux/actions';
 import { message } from 'antd';
+import CustomerInfo from './pages/Customer/CustomerPage';
 
 
 const MainApp = () => {
@@ -121,6 +122,14 @@ const MainApp = () => {
           element={
             <Layout>
               <CreateCardPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/customer-info"
+          element={
+            <Layout>
+              <CustomerInfo />
             </Layout>
           }
         />

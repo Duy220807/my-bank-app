@@ -67,7 +67,7 @@ const RegisterForm = () => {
           <Form.Item label="Số điện thoại" name="phone" rules={[{ required: true, message: "Vui lòng nhập số điện thoại!" }]}>
             <Input placeholder="Nhập số điện thoại" />
           </Form.Item>
-
+          h
           <Form.Item label="Mật khẩu" name="password" rules={[{ required: true, message: "Vui lòng nhập mật khẩu!" }]}>
             <Input.Password placeholder="Nhập mật khẩu" />
           </Form.Item>

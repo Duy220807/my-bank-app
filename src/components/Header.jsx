@@ -22,7 +22,9 @@ const Headers = () => {
 
     const userMenu = (
         <Menu>
-            <Menu.Item key="1">Thông tin cá nhân</Menu.Item>
+            <Menu.Item key="1" onClick={() => navigate("/customer-info")}>
+                Thông tin cá nhân
+            </Menu.Item>
             <Menu.Item key="2" onClick={handleLogout}>Đăng xuất</Menu.Item>
         </Menu>
     );
