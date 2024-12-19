@@ -36,7 +36,7 @@ const AccountDashboard = ({ accountInfo }) => {
               {/* Thông tin bên trái */}
               <div className="sm:w-2/3">
                 <Title level={3} className="text-indigo-600 font-semibold text-center sm:text-left">
-                  {accountInfo.name}
+                  {accountInfo.nickname}
                 </Title>
                 <div className="mt-2">
                   <Paragraph className="text-lg text-center sm:text-left">

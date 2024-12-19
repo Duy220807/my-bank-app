@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "/api/v1/customer-info";
+const API_URL = "/api/v1/";
 
 // Cấu hình axios instance
 const axiosInstance = axios.create({
@@ -13,7 +13,7 @@ const axiosInstance = axios.create({
 // Hàm login
 export const login = async (phone, password) => {
     try {
-        const response = await axiosInstance.post("/auth/login", { phone, password });
+        const response = await axiosInstance.post("customer-info/auth/login", { phone, password });
         return response.data.data; // Lấy dữ liệu từ API
     } catch (error) {
         const errorMessage =
@@ -25,7 +25,7 @@ export const login = async (phone, password) => {
 // Hàm getUserInfo
 export const getUserInfo = async (token) => {
     try {
-        const response = await axiosInstance.get("/customers", {
+        const response = await axiosInstance.get("/customer-info/customers", {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -50,7 +50,7 @@ export const register = async (formData, accountNumber) => {
 
         // Append accountNumber as query param in the URL
         const response = await axiosMultipart.post(
-            `/customers?accountNumber=${encodeURIComponent(accountNumber)}`,
+            `/customer-info/customers?accountNumber=${encodeURIComponent(accountNumber)}`,
             formData
         );
 
@@ -62,3 +62,18 @@ export const register = async (formData, accountNumber) => {
     }
 };
 
+// Hàm getAccountInfo
+export const getUserAccountInfo = async (token) => {
+    try {
+        const response = await axiosInstance.get("/banking-account/bankingAccount", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return response.data.data; // Trả về phần `data` từ API
+    } catch (error) {
+        const errorMessage =
+            error.response?.data?.message || "Không thể lấy thông tin người dùng!";
+        throw new Error(errorMessage);
+    }
+};
